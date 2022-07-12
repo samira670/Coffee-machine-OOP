@@ -1,0 +1,33 @@
+
+
+from coffee_maker import CoffeeMaker
+from money_machine import MoneyMachine
+from menu import MenuItem, Menu
+
+coffee_maker = CoffeeMaker()
+money_machine = MoneyMachine()
+menu = Menu()
+
+is_on = True
+
+while is_on == True:
+
+    choice = input(f"What do you want to order? {menu.get_items()} ")
+
+    if choice == "off":
+        is_on= False
+
+    if  choice == "report":
+        coffee_maker.report()
+        money_machine.report()
+
+    drink = menu.find_drink(choice)
+    print(drink)
+    if coffee_maker.is_resource_sufficient(drink) == True:
+        payment = money_machine.make_payment(drink.cost)
+
+        if payment== True:
+            coffee_maker.make_coffee(drink)
+
+
+
